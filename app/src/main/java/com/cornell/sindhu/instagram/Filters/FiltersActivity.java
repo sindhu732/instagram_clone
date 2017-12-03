@@ -22,7 +22,7 @@ public class FiltersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_filters);
         Log.d(TAG, "onCreate: started");
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavViewBar);
         BottomNavigationViewHelper.enableNavigation(FiltersActivity.this, bottomNavigationView);

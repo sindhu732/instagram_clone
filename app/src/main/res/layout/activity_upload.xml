@@ -1,14 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Upload Fragment"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:textSize="20sp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:text="Share pictures"
+            android:textSize="20sp" />
+
+        <include layout="@layout/layout_bottom_navigation_view"/>
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/imageView"
+            android:layout_below="@+id/textView"
+            android:layout_marginTop="13dp"
+            android:text="From gallery" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/button4"
+            android:layout_alignBottom="@+id/button4"
+            android:layout_alignEnd="@+id/imageView"
+            android:text="From camera" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="300dp"
+            android:layout_height="250dp"
+            android:layout_below="@+id/button4"
+            android:layout_centerHorizontal="true"
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+        <Button
+            android:id="@+id/share_privilages_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/imageView"
+            android:layout_below="@+id/imageView"
+            android:text="Share publicly" />
+
+        <EditText
+            android:id="@+id/editText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/share_privilages_button"
+            android:layout_below="@+id/share_privilages_button"
+            android:ems="10"
+            android:inputType="textMultiLine" />
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/imageView"
+            android:layout_below="@+id/editText3"
+            android:layout_marginTop="18dp"
+            android:text="Post" />
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

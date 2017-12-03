@@ -17,12 +17,12 @@ import com.cornell.sindhu.instagram.R;
 
 public class SearchActivity extends AppCompatActivity{
     private static final String TAG = "SearchActivity";
-    private static final int ACTIVITY_NUMBER = 2;
+    private static final int ACTIVITY_NUMBER = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_search);
         Log.d(TAG, "onCreate: started");
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavViewBar);
         BottomNavigationViewHelper.enableNavigation(SearchActivity.this, bottomNavigationView);

@@ -29,14 +29,14 @@ public class BottomNavigationViewHelper {
                         context.startActivity(homeIntent);
                         break;
 
-                    case R.id.navigation_upload: // ACTIVITY_NUMBER = 1
-                        Intent uploadIntent = new Intent(context, UploadActivity.class);
-                        context.startActivity(uploadIntent);
-                        break;
-
-                    case R.id.navigation_search: // ACTIVITY_NUMBER = 2
+                    case R.id.navigation_search: // ACTIVITY_NUMBER = 1
                         Intent searchIntent = new Intent(context, SearchActivity.class);
                         context.startActivity(searchIntent);
+                        break;
+
+                    case R.id.navigation_upload: // ACTIVITY_NUMBER = 2
+                        Intent uploadIntent = new Intent(context, UploadActivity.class);
+                        context.startActivity(uploadIntent);
                         break;
 
                     case R.id.navigation_account: // ACTIVITY_NUMBER = 3
