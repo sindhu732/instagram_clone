@@ -1,4 +1,4 @@
-package com.cornell.sindhu.instagram;
+package com.cornell.sindhu.instagram.Home;
 
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
@@ -7,7 +7,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+import com.cornell.sindhu.instagram.Utils.BottomNavigationViewHelper;
+import com.cornell.sindhu.instagram.R;
+
+public class HomeActivity extends AppCompatActivity {
 
     private static final String TAG = "HomeActivity";
     private static final int ACTIVITY_NUMBER = 0;
@@ -15,10 +18,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
         Log.d(TAG, "onCreate: starting");
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavViewBar);
-        BottomNavigationViewHelper.enableNavigation(MainActivity.this, bottomNavigationView);
+        BottomNavigationViewHelper.enableNavigation(HomeActivity.this, bottomNavigationView);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUMBER);
         menuItem.setChecked(true);

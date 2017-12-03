@@ -1,10 +1,17 @@
-package com.cornell.sindhu.instagram;
+package com.cornell.sindhu.instagram.Utils;
 
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.view.MenuItem;
+
+import com.cornell.sindhu.instagram.Account.AccountActivity;
+import com.cornell.sindhu.instagram.Filters.FiltersActivity;
+import com.cornell.sindhu.instagram.Home.HomeActivity;
+import com.cornell.sindhu.instagram.R;
+import com.cornell.sindhu.instagram.Search.SearchActivity;
+import com.cornell.sindhu.instagram.Upload.UploadActivity;
 
 /**
  * Created by constantin on 12/3/17.
@@ -18,7 +25,7 @@ public class BottomNavigationViewHelper {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.navigation_home: // ACTIVITY_NUMBER = 0
-                        Intent homeIntent = new Intent(context, MainActivity.class);
+                        Intent homeIntent = new Intent(context, HomeActivity.class);
                         context.startActivity(homeIntent);
                         break;
 

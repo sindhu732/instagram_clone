@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".Home.HomeActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,10 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UploadActivity" android:label="Instagram"></activity>
-        <activity android:name=".SearchActivity" android:label="Instagram"></activity>
-        <activity android:name=".AccountActivity" android:label="Instagram"></activity>
-        <activity android:name=".FiltersActivity" android:label="Instagram"></activity>
+        <activity android:name=".Upload.UploadActivity" android:label="Instagram"></activity>
+        <activity android:name=".Search.SearchActivity" android:label="Instagram"></activity>
+        <activity android:name=".Account.AccountActivity" android:label="Instagram"></activity>
+        <activity android:name=".Filters.FiltersActivity" android:label="Instagram"></activity>
     </application>
 
 </manifest>

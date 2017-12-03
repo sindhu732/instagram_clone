@@ -1,4 +1,4 @@
-package com.cornell.sindhu.instagram;
+package com.cornell.sindhu.instagram.Account;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,21 +8,24 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.cornell.sindhu.instagram.Utils.BottomNavigationViewHelper;
+import com.cornell.sindhu.instagram.R;
+
 /**
  * Created by sindhu on 12/3/17.
  */
 
-public class SearchActivity extends AppCompatActivity{
-    private static final String TAG = "SearchActivity";
-    private static final int ACTIVITY_NUMBER = 2;
+public class AccountActivity extends AppCompatActivity {
+    private static final String TAG = "AccountActivity";
+    private static final int ACTIVITY_NUMBER = 3;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_home);
         Log.d(TAG, "onCreate: started");
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavViewBar);
-        BottomNavigationViewHelper.enableNavigation(SearchActivity.this, bottomNavigationView);
+        BottomNavigationViewHelper.enableNavigation(AccountActivity.this, bottomNavigationView);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUMBER);
         menuItem.setChecked(true);
