@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Instagram</string>
+    <string name="title_home">Home</string>
+    <string name="title_upload">Upload</string>
+    <string name="title_search">Search</string>
+    <string name="title_auth">Account</string>
+    <string name="title_filters">Filters</string>
+</resources>
