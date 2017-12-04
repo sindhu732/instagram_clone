@@ -18,59 +18,62 @@
             android:text="Share pictures"
             android:textSize="20sp" />
 
-        <include layout="@layout/layout_bottom_navigation_view"/>
-
         <Button
-            android:id="@+id/button4"
-            android:layout_width="wrap_content"
+            android:id="@+id/galleryButton"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/imageView"
             android:layout_below="@+id/textView"
             android:layout_marginTop="13dp"
+            android:layout_marginLeft="30dp"
             android:text="From gallery" />
 
         <Button
-            android:id="@+id/button5"
-            android:layout_width="wrap_content"
+            android:id="@+id/cameraButton"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/button4"
-            android:layout_alignBottom="@+id/button4"
-            android:layout_alignEnd="@+id/imageView"
+            android:layout_alignBaseline="@+id/galleryButton"
+            android:layout_alignBottom="@+id/galleryButton"
+            android:layout_toRightOf="@id/galleryButton"
             android:text="From camera" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/uploadedImage"
             android:layout_width="300dp"
-            android:layout_height="250dp"
-            android:layout_below="@+id/button4"
+            android:layout_height="300dp"
+            android:layout_below="@+id/galleryButton"
             android:layout_centerHorizontal="true"
             app:srcCompat="@android:drawable/ic_menu_gallery" />
 
-        <Button
-            android:id="@+id/share_privilages_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/imageView"
-            android:layout_below="@+id/imageView"
-            android:text="Share publicly" />
-
         <EditText
-            android:id="@+id/editText3"
-            android:layout_width="wrap_content"
+            android:id="@+id/description"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/share_privilages_button"
-            android:layout_below="@+id/share_privilages_button"
+            android:layout_alignStart="@+id/uploadedImage"
+            android:layout_alignEnd="@+id/uploadedImage"
+            android:layout_below="@+id/uploadedImage"
             android:ems="10"
+            android:hint="Description"
             android:inputType="textMultiLine" />
 
-        <Button
-            android:id="@+id/button7"
+        <RadioButton
+            android:id="@+id/makePrivateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/imageView"
-            android:layout_below="@+id/editText3"
-            android:layout_marginTop="18dp"
+            android:layout_alignEnd="@+id/galleryButton"
+            android:layout_below="@+id/description"
+            android:layout_marginTop="8dp"
+            android:text="Make private" />
+
+        <Button
+            android:id="@+id/postButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/makePrivateButton"
+            android:layout_toEndOf="@+id/textView"
+            android:layout_below="@+id/description"
             android:text="Post" />
+
+        <include layout="@layout/layout_bottom_navigation_view"/>
 
     </RelativeLayout>
 

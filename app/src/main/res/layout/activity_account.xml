@@ -1,61 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="194dp">
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My Account"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:textSize="20sp"
-            android:id="@+id/textView" />
+            android:layout_marginTop="9dp"
+            android:text="My Account"
+            android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/input_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="42dp"
+            android:layout_marginTop="10dp"
             android:ems="10"
+            android:hint="Email"
             android:inputType="textEmailAddress" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/input_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/editText"
-            android:layout_below="@+id/editText"
-            android:layout_marginTop="22dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/input_email"
+            android:layout_marginTop="3dp"
             android:ems="10"
+            android:hint="Password"
             android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/editText2"
+            android:layout_below="@+id/input_password"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="14dp"
-            android:text="Sign Up / Sign In" />
+            android:text="Sign In" />
+
+        <EditText
+            android:id="@+id/input_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/login_button"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="Name" />
+
+        <EditText
+            android:id="@+id/input_email_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/input_name"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
+
+        <EditText
+            android:id="@+id/input_password_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/input_email_new"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/signup_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/button2"
+            android:layout_below="@+id/input_password_new"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="76dp"
+            android:text="Sign Up" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/signup_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="7dp"
+            android:text="Or" />
+
+        <Button
+            android:id="@+id/login_google_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/textView2"
+            android:layout_marginTop="7dp"
             android:text="Sign In with Google" />
 
-        <include layout="@layout/layout_bottom_navigation_view"/>
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/login_google_button"
+            android:layout_marginTop="7dp"
+            android:text="Logout" />
+
+
+
+        <include layout="@layout/layout_bottom_navigation_view" />
 
     </RelativeLayout>
 
-</android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>
