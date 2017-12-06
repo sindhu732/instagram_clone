@@ -69,6 +69,7 @@ public class HomeActivity extends AppCompatActivity {
                     Log.d(TAG, "got Post: " + snapshot.getValue().toString());
                 }
 
+                // TODO: uncomment these lines after fixing above error
                 //listAdapter = new MainFeedListAdapter(HomeActivity.this, R.layout.layout_feed_list_item, posts);
                 //mFeed.setAdapter(listAdapter);
             }
