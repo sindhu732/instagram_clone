@@ -8,25 +8,11 @@ import java.io.Serializable;
 
 public class Post implements Serializable{
     private String userid;
-    private String name;
+    private String displayName;
     private String email;
     private boolean privateState;
     private String imageUrl;
     private String description;
-
-    public Post(String userid, String name, String email,
-                boolean privateState, String imageUrl, String description) {
-        this.userid = userid;
-        this.name = name;
-        this.email = email;
-        this.privateState = privateState;
-        this.imageUrl = imageUrl;
-        this.description = description;
-    }
-
-    public Post() {
-
-    }
 
     public String getUserid() {
         return userid;
@@ -34,6 +20,14 @@ public class Post implements Serializable{
 
     public void setUserid(String userid) {
         this.userid = userid;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     public String getEmail() {
@@ -44,15 +38,7 @@ public class Post implements Serializable{
         this.email = email;
     }
 
-    public String getDisplayName() {
-        return name;
-    }
-
-    public void setDisplayName(String name) {
-        this.name = name;
-    }
-
-    public boolean getPrivateState() {
+    public boolean isPrivateState() {
         return privateState;
     }
 
@@ -76,12 +62,27 @@ public class Post implements Serializable{
         this.description = description;
     }
 
+    public Post(String userid, String displayName, String email,
+                boolean privateState, String imageUrl, String description) {
+        this.userid = userid;
+        this.displayName = displayName;
+        this.email = email;
+        this.privateState = privateState;
+        this.imageUrl = imageUrl;
+        this.description = description;
+
+    }
+
+    public Post() {
+
+    }
+
 
     public String toString() {
         return "Post{" +
                 "userid='" + userid + '\'' +
                 ", email='" + email + '\'' +
-                ", name='" + name + '\'' +
+                ", displayName='" + displayName + '\'' +
                 ", privateState='" + privateState + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", description='" + description + '\'' +

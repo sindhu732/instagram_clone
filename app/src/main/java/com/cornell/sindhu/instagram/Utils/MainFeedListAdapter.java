@@ -57,7 +57,6 @@ public class MainFeedListAdapter extends ArrayAdapter<Post>{
             holder.description = (TextView) convertView.findViewById(R.id.description);
             holder.image = (ImageView) convertView.findViewById(R.id.postImage);
             holder.privateStatus = (TextView) convertView.findViewById(R.id.privateStatus);
-            holder.publicStatus = (TextView) convertView.findViewById(R.id.publicStatus);
 
             holder.post = getItem(position);
         }
@@ -66,3 +65,12 @@ public class MainFeedListAdapter extends ArrayAdapter<Post>{
     }
 
 }
+
+
+
+
+
+
+
+
+

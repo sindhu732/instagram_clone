@@ -55,7 +55,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private void downloadMyFeed() {
 
-        final List<Post> posts = new ArrayList<>();
+        final ArrayList<Post> posts = new ArrayList<>();
         DatabaseReference myRef = mDatabase.getReference("posts");
         final FirebaseUser currentUser = mAuth.getCurrentUser();
 
@@ -65,13 +65,14 @@ public class HomeActivity extends AppCompatActivity {
                 Log.d(TAG, "got Data " + dataSnapshot.getChildren().toString());
 
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
-                    posts.add(snapshot.getValue(Post.class)); // TODO: Need to pass in Post object to posts from Java Object. Clue: No setter/field for -L-dtEzsYFY_YdhfFBO2 found on class com.cornell.sindhu.instagram.Models.Post
-                    Log.d(TAG, "got Post: " + snapshot.getValue().toString());
+                    for(DataSnapshot snapshot1: snapshot.getChildren()) {
+                        posts.add(snapshot1.getValue(Post.class));
+                        Log.d(TAG, "got Post: " + snapshot1.getValue().toString());
+                    }
                 }
 
-                // TODO: uncomment these lines after fixing above error
-                //listAdapter = new MainFeedListAdapter(HomeActivity.this, R.layout.layout_feed_list_item, posts);
-                //mFeed.setAdapter(listAdapter);
+                listAdapter = new MainFeedListAdapter(HomeActivity.this, R.layout.layout_feed_list_item, posts);
+                mFeed.setAdapter(listAdapter);
             }
 
             @Override
