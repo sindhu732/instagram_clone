@@ -55,7 +55,7 @@ public class MainFeedListAdapter extends ArrayAdapter<Post>{
 
             holder.displayName = (TextView) convertView.findViewById(R.id.displayName);
             holder.description = (TextView) convertView.findViewById(R.id.description);
-            holder.image = (ImageView) convertView.findViewById(R.id.postImage);
+            holder.image = (ImageView) convertView.findViewById(R.id.image);
             holder.privateStatus = (TextView) convertView.findViewById(R.id.privateStatus);
 
             holder.post = getItem(position);
