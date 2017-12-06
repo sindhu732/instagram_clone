@@ -20,21 +20,12 @@
 
         <Button
             android:id="@+id/galleryButton"
-            android:layout_width="150dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/postButton"
             android:layout_below="@+id/textView"
             android:layout_marginTop="13dp"
-            android:layout_marginLeft="30dp"
-            android:text="From gallery" />
-
-        <Button
-            android:id="@+id/cameraButton"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/galleryButton"
-            android:layout_alignBottom="@+id/galleryButton"
-            android:layout_toRightOf="@id/galleryButton"
-            android:text="From camera" />
+            android:text="Select image to Upload" />
 
         <ImageView
             android:id="@+id/uploadedImage"
@@ -59,7 +50,7 @@
             android:id="@+id/makePrivateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/galleryButton"
+            android:layout_alignStart="@+id/uploadedImage"
             android:layout_below="@+id/description"
             android:layout_marginTop="8dp"
             android:text="Make private" />
