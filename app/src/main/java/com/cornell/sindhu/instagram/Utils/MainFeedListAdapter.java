@@ -38,7 +38,7 @@ public class MainFeedListAdapter extends ArrayAdapter<Post>{
     }
 
     static class PostView{
-        TextView displayName, description, privateStatus, publicStatus;
+        TextView displayName, description, privateStatus;
         ImageView image;
         Post post;
     }

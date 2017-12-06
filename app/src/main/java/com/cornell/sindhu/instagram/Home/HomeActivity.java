@@ -41,15 +41,16 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        //setContentView(R.layout.activity_home);
+        setContentView(R.layout.fragment_feed);
         Log.d(TAG, "onCreate: starting");
 
         setupBottomNavigationBar();
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
 
-        mFeed = findViewById(R.id.myFeed);
-
+        mFeed = (ListView) findViewById(R.id.myFeed);
+        Log.d(TAG, mFeed.toString());
         downloadMyFeed();
     }
 
@@ -62,14 +63,16 @@ public class HomeActivity extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d(TAG, "got Data " + dataSnapshot.getChildren().toString());
+                //Log.d(TAG, "got Data " + dataSnapshot.getChildren().toString());
 
                 for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
                     for(DataSnapshot snapshot1: snapshot.getChildren()) {
                         posts.add(snapshot1.getValue(Post.class));
-                        Log.d(TAG, "got Post: " + snapshot1.getValue().toString());
+                        //Log.d(TAG, "got Post: " + snapshot1.getValue().toString());
                     }
                 }
+
+                Log.d(TAG, posts.toString());
 
                 listAdapter = new MainFeedListAdapter(HomeActivity.this, R.layout.layout_feed_list_item, posts);
                 mFeed.setAdapter(listAdapter);
