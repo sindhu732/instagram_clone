@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.cornell.sindhu.instagram.Home.HomeActivity;
@@ -26,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -44,6 +46,8 @@ public class SearchActivity extends AppCompatActivity{
 
     private EditText mSearchTerm;
     private ImageButton mSearchButton;
+    private String searchResultUrl;
+    private ImageView mSearchResultImage;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,6 +58,8 @@ public class SearchActivity extends AppCompatActivity{
         mAuth = FirebaseAuth.getInstance();
         mSearchTerm = findViewById(R.id.searchTerm);
         mSearchButton = findViewById(R.id.searchButton);
+        mSearchResultImage = findViewById(R.id.searchResult);
+
         mSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,14 +74,14 @@ public class SearchActivity extends AppCompatActivity{
                         pathPosts += "/private";
                     }
 
-                    downloadMyFeed();
+                    search(searchTerm);
                 }
             }
         });
-        
+
     }
 
-    private void downloadMyFeed() {
+    private void search(final String searchTerm) {
         final ArrayList<Post> posts = new ArrayList<>();
         DatabaseReference myRef = mDatabase.getReference("posts");
         final FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -83,19 +89,34 @@ public class SearchActivity extends AppCompatActivity{
             myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //Log.d(TAG, "got Data " + dataSnapshot.getChildren().toString());
 
-                for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                for(DataSnapshot snapshot: dataSnapshot.child("public").getChildren()) {
                     for(DataSnapshot snapshot1: snapshot.getChildren()) {
-                        posts.add(snapshot1.getValue(Post.class));
-                        //Log.d(TAG, "got Post: " + snapshot1.getValue().toString());
+                        if(snapshot1.getValue(Post.class).getDescription().equals(searchTerm)) {
+                            posts.add(snapshot1.getValue(Post.class));
+                            break;
+                        }
+                    }
+                }
+
+                if (currentUser != null) {
+                    for(DataSnapshot snapshot: dataSnapshot.child("private").child(currentUser.getUid()).getChildren()) {
+                        if(snapshot.getValue(Post.class).getDescription().equals(searchTerm)) {
+                            posts.add(snapshot.getValue(Post.class));
+                            break;
+                        }
                     }
                 }
 
                 Log.d(TAG, posts.toString());
 
-//                listAdapter = new MainFeedListAdapter(SearchActivity.this, R.layout.layout_feed_list_item, posts);
-//                mFeed.setAdapter(listAdapter);
+                if(!posts.isEmpty()) {
+                    Log.d(TAG, posts.get(0).getImageUrl());
+
+                    Picasso.with(SearchActivity.this).load(posts.get(0).getImageUrl()).into(mSearchResultImage);
+                } else {
+                    Log.d(TAG, "No result found");
+                }
             }
 
             @Override
