@@ -23,3 +23,5 @@
 -keepattributes Signature
 
 -keepclassmembers class com.cornell.sindhu.instagram.Models.** { *; }
+
+-dontwarn com.squareup.okhttp.**

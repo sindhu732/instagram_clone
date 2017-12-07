@@ -19,20 +19,27 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.cornell.sindhu.instagram.Account.AccountActivity;
+import com.cornell.sindhu.instagram.Home.HomeActivity;
 import com.cornell.sindhu.instagram.Manifest;
 import com.cornell.sindhu.instagram.Models.Post;
 import com.cornell.sindhu.instagram.Utils.BottomNavigationViewHelper;
 import com.cornell.sindhu.instagram.R;
+import com.cornell.sindhu.instagram.Utils.MainFeedListAdapter;
 import com.cornell.sindhu.instagram.Utils.Permissions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
+import java.util.ArrayList;
 
 /**
  * Created by sindhu on 12/3/17.
@@ -94,7 +101,45 @@ public class UploadActivity extends AppCompatActivity {
                 boolean privateState = mPrivateState.isChecked();
                 String uid = currentUser.getUid();
                 Post newPost = new Post(uid, currentUser.getDisplayName(), currentUser.getEmail(), privateState, imageDownloadUrl, description);
-                myRef.child("posts").child(uid).push().setValue(newPost);
+
+                if (currentUser != null) {
+                    if (privateState) {
+                        myRef.child("posts/private").child(uid).push().setValue(newPost);
+                    } else {
+                        myRef.child("posts/public").child(uid).push().setValue(newPost);
+                    }
+                }
+            }
+        });
+    }
+
+    private void downloadMyFeed() {
+
+        final ArrayList<Post> posts = new ArrayList<>();
+        DatabaseReference myRef = mDatabase.getReference("posts");
+        final FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //Log.d(TAG, "got Data " + dataSnapshot.getChildren().toString());
+
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                    for(DataSnapshot snapshot1: snapshot.getChildren()) {
+                        posts.add(snapshot1.getValue(Post.class));
+                        //Log.d(TAG, "got Post: " + snapshot1.getValue().toString());
+                    }
+                }
+
+                Log.d(TAG, posts.toString());
+
+                listAdapter = new MainFeedListAdapter(HomeActivity.this, R.layout.layout_feed_list_item, posts);
+                mFeed.setAdapter(listAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
     }
@@ -122,8 +167,6 @@ public class UploadActivity extends AppCompatActivity {
             Log.d(TAG, "User signed in already");
         } else {
             Log.d(TAG, "User not logged in");
-//            Intent intent = new Intent(UploadActivity.this, AccountActivity.class);
-//            startActivity(intent);
             Toast.makeText(UploadActivity.this, "Can't upload without Logging in", Toast.LENGTH_SHORT).show();
         }
     }

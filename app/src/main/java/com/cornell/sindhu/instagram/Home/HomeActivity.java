@@ -98,8 +98,6 @@ public class HomeActivity extends AppCompatActivity {
             Log.d(TAG, "User signed in already");
         } else {
             Log.d(TAG, "User not logged in");
-            Intent intent = new Intent(HomeActivity.this, AccountActivity.class);
-            startActivity(intent);
         }
     }
 

@@ -31,6 +31,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     compile 'com.android.support:design:26.0.0'
+    compile 'com.squareup.picasso:picasso:2.5.2' // Image downloading and caching library
 }
 
 

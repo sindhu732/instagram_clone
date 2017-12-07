@@ -1,6 +1,8 @@
 package com.cornell.sindhu.instagram.Utils;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,7 +17,10 @@ import android.widget.TextView;
 import com.cornell.sindhu.instagram.Models.Post;
 import com.cornell.sindhu.instagram.R;
 import com.google.firebase.database.DatabaseReference;
+import com.squareup.picasso.Picasso;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -39,7 +44,8 @@ public class MainFeedListAdapter extends ArrayAdapter<Post>{
 
     static class PostView{
         TextView displayName, description, privateStatus;
-        ImageView image;
+        ImageView imageView;
+        URL image;
         Post post;
     }
 
@@ -55,11 +61,15 @@ public class MainFeedListAdapter extends ArrayAdapter<Post>{
 
             holder.displayName = (TextView) convertView.findViewById(R.id.displayName);
             holder.description = (TextView) convertView.findViewById(R.id.description);
-            holder.image = (ImageView) convertView.findViewById(R.id.image);
+            holder.imageView = (ImageView) convertView.findViewById(R.id.image);
             holder.privateStatus = (TextView) convertView.findViewById(R.id.privateStatus);
-
             holder.post = getItem(position);
         }
+
+//        Bitmap bitmap = BitmapFactory.decodeStream((InputStream)new URL(image).getContent());
+//        holder.image.setImageBitmap(bitmap);
+//
+//        Picasso.with(mContext).load(holder.post).into(convertView);
 
         return convertView;
     }

@@ -22,7 +22,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/searchTerm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -33,34 +33,42 @@
             android:text="Name" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/editText4"
-            android:layout_marginStart="10dp"
+            android:layout_alignTop="@+id/searchTerm"
+            android:layout_marginEnd="11dp"
             android:layout_marginTop="7dp"
+            android:layout_toStartOf="@+id/searchResult"
             app:srcCompat="@drawable/ic_search" />
 
         <include layout="@layout/layout_bottom_navigation_view" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/searchButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/editText4"
-            android:layout_marginStart="8dp"
-            android:layout_toEndOf="@+id/editText4"
+            android:layout_alignTop="@+id/searchTerm"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@+id/searchTerm"
             app:srcCompat="@android:drawable/ic_menu_send" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/searchResult"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:layout_below="@+id/editText4"
+            android:layout_below="@+id/searchTerm"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="27dp"
+            android:layout_marginTop="22dp"
             app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/searchResult"
+            android:layout_alignStart="@id/search"
+            android:layout_alignEnd="@id/searchButton"/>
 
     </RelativeLayout>
 
