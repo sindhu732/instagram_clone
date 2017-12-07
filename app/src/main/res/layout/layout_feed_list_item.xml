@@ -7,8 +7,7 @@
     <TextView
         android:id="@+id/displayName"
         android:layout_width="match_parent"
-        android:layout_height="48sp"
-        android:text="TextView" />
+        android:layout_height="48sp" />
 
     <ImageView
         android:id="@+id/image"
@@ -19,14 +18,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/privateStatus"
-        android:text="Private"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/publicStatus"
-        android:text="Public"/>
+        android:id="@+id/privateStatus" />
 
     <TextView
         android:layout_width="match_parent"

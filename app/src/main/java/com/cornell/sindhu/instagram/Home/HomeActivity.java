@@ -63,12 +63,16 @@ public class HomeActivity extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //Log.d(TAG, "got Data " + dataSnapshot.getChildren().toString());
 
-                for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                for(DataSnapshot snapshot: dataSnapshot.child("public").getChildren()) {
                     for(DataSnapshot snapshot1: snapshot.getChildren()) {
                         posts.add(snapshot1.getValue(Post.class));
-                        //Log.d(TAG, "got Post: " + snapshot1.getValue().toString());
+                    }
+                }
+
+                if (currentUser != null) {
+                    for(DataSnapshot snapshot: dataSnapshot.child("private").child(currentUser.getUid()).getChildren()) {
+                        posts.add(snapshot.getValue(Post.class));
                     }
                 }
 

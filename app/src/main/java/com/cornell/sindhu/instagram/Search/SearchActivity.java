@@ -67,11 +67,12 @@ public class SearchActivity extends AppCompatActivity{
                     } else {
                         pathPosts += "/private";
                     }
+
+                    downloadMyFeed();
                 }
             }
         });
-
-
+        
     }
 
     private void downloadMyFeed() {
