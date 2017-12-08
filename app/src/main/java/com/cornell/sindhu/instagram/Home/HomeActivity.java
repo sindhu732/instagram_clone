@@ -36,7 +36,8 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseDatabase mDatabase;
     private ListView mFeed;
-    private ListAdapter listAdapter;
+    private MainFeedListAdapter listAdapter;
+    private ArrayList<Post> posts = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,37 +50,33 @@ public class HomeActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance();
 
-        mFeed = (ListView) findViewById(R.id.myFeed);
+        mFeed = findViewById(R.id.myFeed);
         Log.d(TAG, mFeed.toString());
+        listAdapter = new MainFeedListAdapter(HomeActivity.this, R.layout.layout_feed_list_item, posts);
+        mFeed.setAdapter(listAdapter);
         downloadMyFeed();
     }
 
     private void downloadMyFeed() {
 
-        final ArrayList<Post> posts = new ArrayList<>();
-        DatabaseReference myRef = mDatabase.getReference("posts");
-        final FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        DatabaseReference myRef = mDatabase.getReference("posts/public");
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-                for(DataSnapshot snapshot: dataSnapshot.child("public").getChildren()) {
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
                     for(DataSnapshot snapshot1: snapshot.getChildren()) {
-                        posts.add(snapshot1.getValue(Post.class));
-                    }
-                }
-
-                if (currentUser != null) {
-                    for(DataSnapshot snapshot: dataSnapshot.child("private").child(currentUser.getUid()).getChildren()) {
-                        posts.add(snapshot.getValue(Post.class));
+                        Post post = snapshot1.getValue(Post.class);
+                        posts.add(post);
                     }
                 }
 
                 Log.d(TAG, posts.toString());
 
-                listAdapter = new MainFeedListAdapter(HomeActivity.this, R.layout.layout_feed_list_item, posts);
-                mFeed.setAdapter(listAdapter);
+                listAdapter.setPosts(posts);
+                listAdapter.notifyDataSetChanged();
             }
 
             @Override
