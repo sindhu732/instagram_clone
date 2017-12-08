@@ -71,14 +71,15 @@ public class FiltersActivity extends AppCompatActivity {
                         for(DataSnapshot snapshot1: snapshot.getChildren()) {
                             Post post = snapshot1.getValue(Post.class);
                             String imageName = post.getImageName();
-                            String processedImageUrl = mStorageRef.child("ascii-" + currentUser.getUid()).child(imageName).getDownloadUrl().toString();
+                            Log.d(TAG, imageName);
+                            String processedImageUrl = mStorageRef.child("ascii-Ar6bsXbrcRhw4Ckm3xEI90k96kJ3/"+ imageName).getDownloadUrl().toString();
                             post.setImageUrl(processedImageUrl);
                             Log.d(TAG, post.getImageUrl());
                             processedImages.add(post);
                         }
                     }
 
-                    //Log.d(TAG, processedImages.toString());
+                    Log.d(TAG, processedImages.toString());
 
                     listAdapter.setPosts(processedImages);
                     listAdapter.notifyDataSetChanged();
