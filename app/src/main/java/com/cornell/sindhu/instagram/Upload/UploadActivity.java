@@ -103,6 +103,14 @@ public class UploadActivity extends AppCompatActivity {
                         myRef.child("posts/public").child(uid).push().setValue(newPost);
                     }
                 }
+
+//                if (currentUser != null) {
+//                    if (privateState) {
+//                        myRef.child("processed/private").child(uid).push().setValue(newPost);
+//                    } else {
+//                        myRef.child("processed/private").child(uid).push().setValue(newPost);
+//                    }
+//                }
             }
         });
     }

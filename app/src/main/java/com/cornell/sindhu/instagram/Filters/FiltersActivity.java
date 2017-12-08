@@ -1,5 +1,6 @@
 package com.cornell.sindhu.instagram.Filters;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
@@ -13,6 +14,7 @@ import com.cornell.sindhu.instagram.Models.Post;
 import com.cornell.sindhu.instagram.Utils.BottomNavigationViewHelper;
 import com.cornell.sindhu.instagram.R;
 import com.cornell.sindhu.instagram.Utils.MainFeedListAdapter;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -64,22 +66,31 @@ public class FiltersActivity extends AppCompatActivity {
         if (currentUser!= null){
 
             DatabaseReference privateRef = mDatabase.getReference("posts/private");
+
+            //DatabaseReference privateRef = mDatabase.getReference("processed/private");
             privateRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
                         for(DataSnapshot snapshot1: snapshot.getChildren()) {
-                            Post post = snapshot1.getValue(Post.class);
+                            final Post post = snapshot1.getValue(Post.class);
                             String imageName = post.getImageName();
                             Log.d(TAG, imageName);
-                            String processedImageUrl = mStorageRef.child("ascii-Ar6bsXbrcRhw4Ckm3xEI90k96kJ3/"+ imageName).getDownloadUrl().toString();
-                            post.setImageUrl(processedImageUrl);
-                            Log.d(TAG, post.getImageUrl());
+                            mStorageRef.child("ascii-Ar6bsXbrcRhw4Ckm3xEI90k96kJ3/"+ imageName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    String processedImageUrl = uri.toString();
+                                    post.setImageUrl(processedImageUrl);
+                                    Log.d(TAG, ">>>" + post.getImageUrl());
+                                }
+                            });
+                            post.setImageUrl(mStorageRef.child("ascii-Ar6bsXbrcRhw4Ckm3xEI90k96kJ3/"+ imageName).getDownloadUrl().getResult().toString());
                             processedImages.add(post);
                         }
                     }
 
-                    Log.d(TAG, processedImages.toString());
+                    Log.d(TAG, "@@@" + processedImages.toString());
+
 
                     listAdapter.setPosts(processedImages);
                     listAdapter.notifyDataSetChanged();
