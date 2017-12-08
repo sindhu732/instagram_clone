@@ -56,7 +56,7 @@ public class UploadActivity extends AppCompatActivity {
     private EditText mDescription;
     private RadioButton mPrivateState;
 
-    String imageDownloadUrl;
+    String imageDownloadUrl, imageFilename;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,7 +94,7 @@ public class UploadActivity extends AppCompatActivity {
                 String description = mDescription.getText().toString();
                 boolean privateState = mPrivateState.isChecked();
                 String uid = currentUser.getUid();
-                Post newPost = new Post(uid, currentUser.getDisplayName(), currentUser.getEmail(), privateState, imageDownloadUrl, description);
+                Post newPost = new Post(uid, currentUser.getDisplayName(), currentUser.getEmail(), privateState, imageFilename, imageDownloadUrl, description);
 
                 if (currentUser != null) {
                     if (privateState) {
@@ -144,9 +144,9 @@ public class UploadActivity extends AppCompatActivity {
 
     private void uploadImageToFirebase(Uri file) {
 
-        String filename = UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
+        imageFilename = UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
         currentUser = mAuth.getCurrentUser();
-        StorageReference postedImagesRef = mStorageRef.child(currentUser.getUid()).child(filename);
+        StorageReference postedImagesRef = mStorageRef.child(currentUser.getUid()).child(imageFilename);
 
         postedImagesRef.putFile(file)
             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

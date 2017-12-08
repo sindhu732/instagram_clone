@@ -11,6 +11,7 @@ public class Post implements Serializable{
     private String displayName;
     private String email;
     private boolean privateState;
+    private String imageName;
     private String imageUrl;
     private String description;
 
@@ -46,6 +47,14 @@ public class Post implements Serializable{
         this.privateState = privateState;
     }
 
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }
@@ -63,11 +72,12 @@ public class Post implements Serializable{
     }
 
     public Post(String userid, String displayName, String email,
-                boolean privateState, String imageUrl, String description) {
+                boolean privateState, String imageName, String imageUrl, String description) {
         this.userid = userid;
         this.displayName = displayName;
         this.email = email;
         this.privateState = privateState;
+        this.imageName = imageName;
         this.imageUrl = imageUrl;
         this.description = description;
 
@@ -84,6 +94,7 @@ public class Post implements Serializable{
                 ", email='" + email + '\'' +
                 ", displayName='" + displayName + '\'' +
                 ", privateState='" + privateState + '\'' +
+                ", imageName='" + imageName + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", description='" + description + '\'' +
                 '}';
