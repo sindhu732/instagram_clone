@@ -59,17 +59,24 @@ public class HomeActivity extends AppCompatActivity {
 
     private void downloadMyFeed() {
 
-
-        DatabaseReference myRef = mDatabase.getReference("posts/public");
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        DatabaseReference myRef = mDatabase.getReference("posts");
+        final FirebaseUser currentUser = mAuth.getCurrentUser();
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                for(DataSnapshot snapshot: dataSnapshot.child("public").getChildren()) {
                     for(DataSnapshot snapshot1: snapshot.getChildren()) {
                         Post post = snapshot1.getValue(Post.class);
                         posts.add(post);
+                    }
+                }
+
+                for(DataSnapshot snapshot: dataSnapshot.child("private").getChildren()) {
+                    for(DataSnapshot snapshot1: snapshot.getChildren()) {
+                        Post post = snapshot1.getValue(Post.class);
+                        posts.add(post);
+                        
                     }
                 }
 

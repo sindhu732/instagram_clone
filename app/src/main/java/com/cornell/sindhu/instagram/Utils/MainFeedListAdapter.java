@@ -79,6 +79,13 @@ public class MainFeedListAdapter extends ArrayAdapter<Post>{
             holder = (PostView) convertView.getTag();
         }
         Picasso.with(mContext).load(posts.get(position).getImageUrl()).into(holder.imageView);
+        holder.displayName.setText(posts.get(position).getDisplayName());
+        holder.description.setText(posts.get(position).getDescription());
+        if (posts.get(position).isPrivateState()) {
+            holder.privateStatus.setText("Private");
+        } else {
+            holder.privateStatus.setText("Public");
+        }
         return convertView;
     }
 

@@ -34,6 +34,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.UUID;
+
 /**
  * Created by sindhu on 12/3/17.
  */
@@ -55,7 +57,6 @@ public class UploadActivity extends AppCompatActivity {
     private RadioButton mPrivateState;
 
     String imageDownloadUrl;
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -142,7 +143,8 @@ public class UploadActivity extends AppCompatActivity {
     }
 
     private void uploadImageToFirebase(Uri file) {
-        String filename = "ImageUniqueName.jpg";
+
+        String filename = UUID.randomUUID().toString().replaceAll("-", "") + ".jpg";
         currentUser = mAuth.getCurrentUser();
         StorageReference postedImagesRef = mStorageRef.child(currentUser.getUid()).child(filename);
 
