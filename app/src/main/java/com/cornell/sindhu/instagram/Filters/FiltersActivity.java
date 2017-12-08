@@ -41,6 +41,7 @@ public class FiltersActivity extends AppCompatActivity {
     private MainFeedListAdapter listAdapter;
     private ArrayList<Post> processedImages = new ArrayList<>();
     private StorageReference mStorageRef;
+    private String processedImageUrl;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,24 +77,23 @@ public class FiltersActivity extends AppCompatActivity {
                             final Post post = snapshot1.getValue(Post.class);
                             String imageName = post.getImageName();
                             Log.d(TAG, imageName);
-                            mStorageRef.child("ascii-Ar6bsXbrcRhw4Ckm3xEI90k96kJ3/"+ imageName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            mStorageRef.child("ascii-" + currentUser.getUid() + "/"+ imageName).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
-                                    String processedImageUrl = uri.toString();
+                                    processedImageUrl = uri.toString();
+                                    Log.d(TAG, processedImageUrl);
                                     post.setImageUrl(processedImageUrl);
-                                    Log.d(TAG, ">>>" + post.getImageUrl());
+                                    Log.d(TAG, post.getImageUrl());
+                                    processedImages.add(post);
+
+                                    Log.d(TAG, processedImages.toString());
+
+                                    listAdapter.setPosts(processedImages);
+                                    listAdapter.notifyDataSetChanged();
                                 }
                             });
-                            post.setImageUrl(mStorageRef.child("ascii-Ar6bsXbrcRhw4Ckm3xEI90k96kJ3/"+ imageName).getDownloadUrl().getResult().toString());
-                            processedImages.add(post);
                         }
                     }
-
-                    Log.d(TAG, "@@@" + processedImages.toString());
-
-
-                    listAdapter.setPosts(processedImages);
-                    listAdapter.notifyDataSetChanged();
                 }
 
                 @Override
