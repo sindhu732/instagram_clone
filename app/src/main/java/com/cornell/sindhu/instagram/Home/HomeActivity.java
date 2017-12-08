@@ -59,24 +59,14 @@ public class HomeActivity extends AppCompatActivity {
 
     private void downloadMyFeed() {
 
-        DatabaseReference myRef = mDatabase.getReference("posts");
-        final FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        myRef.addValueEventListener(new ValueEventListener() {
+        DatabaseReference publicRef = mDatabase.getReference("posts/public");
+        publicRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot snapshot: dataSnapshot.child("public").getChildren()) {
+                for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
                     for(DataSnapshot snapshot1: snapshot.getChildren()) {
                         Post post = snapshot1.getValue(Post.class);
                         posts.add(post);
-                    }
-                }
-
-                for(DataSnapshot snapshot: dataSnapshot.child("private").getChildren()) {
-                    for(DataSnapshot snapshot1: snapshot.getChildren()) {
-                        Post post = snapshot1.getValue(Post.class);
-                        posts.add(post);
-                        
                     }
                 }
 
@@ -91,6 +81,32 @@ public class HomeActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser!= null){
+            DatabaseReference privateRef = mDatabase.getReference("posts/private");
+            privateRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for(DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                        for(DataSnapshot snapshot1: snapshot.getChildren()) {
+                            Post post = snapshot1.getValue(Post.class);
+                            posts.add(post);
+                        }
+                    }
+
+                    Log.d(TAG, posts.toString());
+
+                    listAdapter.setPosts(posts);
+                    listAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    Log.w(TAG, "Failed to read value.", error.toException());
+                }
+            });
+        }
     }
 
     private void setupBottomNavigationBar() {
